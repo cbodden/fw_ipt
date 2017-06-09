@@ -33,6 +33,9 @@ function ipt()
     ${_IPT} -A OUTPUT -p tcp -m tcp --dport domain -j ACCEPT
     ${_IPT} -A OUTPUT -p udp -m udp --dport domain -j ACCEPT
 
+    # irc
+    ${_IPT} -A OUTPUT -p tcp -m tcp --dport ircd -j ACCEPT
+
     # plex
     ${_IPT} -A OUTPUT -p tcp -m tcp --dport 32400 -j ACCEPT
 
