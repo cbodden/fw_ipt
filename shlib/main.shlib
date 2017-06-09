@@ -1,0 +1,13 @@
+function main()
+{
+    set -euo pipefail
+    IFS=$'\n\t'
+
+    ## check for sudo / root
+    readonly R_UID="0"
+    [[ "${UID}" -ne "${R_UID}" ]] \
+        && { printf "\nNeeds sudo\n\n"; exit 1; }
+
+    _IPT="/sbin/iptables"
+    _IP6T="/sbin/ip6tables"
+}
