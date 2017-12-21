@@ -35,9 +35,20 @@ function ipt()
 
     # irc
     ${_IPT} -A OUTPUT -p tcp -m tcp --dport ircd -j ACCEPT
+    ${_IPT} -A OUTPUT -p tcp -m tcp --dport 7000 -j ACCEPT
+    ${_IPT} -A OUTPUT -p tcp -m tcp --dport 61999 -j ACCEPT
+
+    # mail (mutt)
+    ${_IPT} -A OUTPUT -p tcp -m tcp --dport 587 -j ACCEPT
+    ${_IPT} -A OUTPUT -p tcp -m tcp --dport 993 -j ACCEPT
 
     # plex
     ${_IPT} -A OUTPUT -p tcp -m tcp --dport 32400 -j ACCEPT
+    ${_IPT} -A OUTPUT -p tcp -m tcp --dport 32469 -j ACCEPT
+    ${_IPT} -A OUTPUT -p udp -m udp --dport 32469 -j ACCEPT
+    ${_IPT} -A INPUT -p udp -m udp --dport 5353 -j ACCEPT
+    ${_IPT} -A OUTPUT -p udp -m udp --dport 5353 -j ACCEPT
+    ${_IPT} -A OUTPUT -p udp -m udp --dport 1900 -j ACCEPT
 
     # OpenVPN
     ${_IPT} -A OUTPUT -o ${_WINT} -m udp -p udp --dport openvpn -j ACCEPT
