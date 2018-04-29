@@ -15,6 +15,7 @@ function ipt()
     ${_IPT} -t filter -A OUTPUT -p icmp -j ACCEPT
 
     # rsync (for eix)
+    ${_IPT} -A INPUT -p tcp --dport rsync --syn -m state --state NEW -j ACCEPT
     ${_IPT} -A OUTPUT -p tcp --dport rsync --syn -m state --state NEW -j ACCEPT
 
     # ssh
@@ -49,6 +50,9 @@ function ipt()
     ${_IPT} -A INPUT -p udp -m udp --dport 5353 -j ACCEPT
     ${_IPT} -A OUTPUT -p udp -m udp --dport 5353 -j ACCEPT
     ${_IPT} -A OUTPUT -p udp -m udp --dport 1900 -j ACCEPT
+
+    # misc
+    ${_IPT} -A OUTPUT -p tcp -m tcp --dport 61022 -j ACCEPT
 
     # OpenVPN
     ${_IPT} -A OUTPUT -o ${_WINT} -m udp -p udp --dport openvpn -j ACCEPT
